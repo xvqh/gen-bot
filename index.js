@@ -8,10 +8,6 @@ client.cooldowns = new Map();
 
 Commands(client);
 
-client.on("ready", () => {
-    console.log(client.user.tag)
-})
-
 client.on("messageCreate", message => {
     if (!message.content.startsWith(config.client.prefix)) return;
 
