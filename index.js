@@ -55,6 +55,7 @@ client.on('messageCreate', message => {
 
 client.on("ready", () => {
     client.user.setActivity({name: "🏯", type: 5})
+    console.log(client.user.tag)
 })
 
 client.login(config.client.token)
