@@ -45,12 +45,17 @@ client.on("interactionCreate", async interaction => {
 
 // 〃 Bot ping
 client.on('messageCreate', message => {
+  
+  if (message.author.bot) return;
+  
+  const isOnlyBotMention = message.content.replace(/<@!?(\d+)>/g, '').trim() === '' && message.mentions.users.has(client.user.id);
+  
+  const isReplyToBot = message.reference && message.reference.messageId ? (message.channel.messages.cache.get(message.reference.messageId)?.author.id === client.user.id) : false;
 
-    if (message.mentions.has(client.user) && !message.author.bot) {
-        message.reply(`Mon prefix est \`${config.client.prefix}\``);
-    }
+  if (isOnlyBotMention && !isReplyToBot) {
+      message.reply(`Mon préfix est \`${config.client.prefix}\``)
+  }
 });
-
 
 client.on("ready", () => {
     client.user.setActivity({name: "🏯", type: 5})
